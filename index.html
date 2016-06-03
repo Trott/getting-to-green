@@ -1,0 +1,71 @@
+<!doctype html>
+<title>Getting To Green</title>
+<meta charset="utf-8"/>
+<style>
+#slides {
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+}
+
+.slide {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  z-index: 1;
+
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+.showing {
+  opacity: 1;
+  z-index: 2;
+}
+
+.slide {
+  font-size: 40px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #333;
+  color: #fff;
+}
+</style>
+<section id="slides">
+  <div class="slide showing">Slide 1</div>
+  <div class="slide">Slide 2</div>
+  <div class="slide">Slide 3</div>
+  <div class="slide">Slide 4</div>
+  <div class="slide">Slide 5</div>
+</section>
+<script>
+var slides = document.querySelectorAll('#slides .slide');
+var currentSlide = 0;
+
+function nextSlide() {
+  goToSlide(currentSlide+1);
+}
+
+function previousSlide() {
+  goToSlide(currentSlide-1);
+}
+
+function goToSlide(n) {
+  slides[currentSlide].className = 'slide';
+  currentSlide = (n+slides.length)%slides.length;
+  slides[currentSlide].className = 'slide showing';
+}
+
+document.addEventListener('keyup', function(e) {
+  if (e.code === "ArrowRight")
+    return nextSlide();
+
+  if (e.code === "ArrowLeft")
+    return previousSlide();
+});
+</script>
